@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="JavaFxApplication.jnlp">
+    <information>
+        <title>MegurimasuGUI</title>
+        <vendor>‰∏çÊ??</vendor>
+        <description>„Å™„Å?</description>
+        <offline-allowed/>
+    </information>
+    <update check="background"/>
+    <resources>
+        <j2se version="10.0.1+" href="http://java.sun.com/products/autodl/j2se"/>
+        <jar href="JavaFxApplication.jar" size="47685" download="eager"/>
+        <jar href="lib\jackson\jackson-annotations-2.9.7.jar" size="66981" download="eager"/>
+        <jar href="lib\jackson\jackson-core-2.9.7.jar" size="324036" download="eager"/>
+        <jar href="lib\jackson\jackson-databind-2.9.7.jar" size="1350857" download="eager"/>
+        <jar href="lib\readQR\core-3.3.0.jar" size="541078" download="eager"/>
+        <jar href="lib\readQR\javase-3.3.0.jar" size="41451" download="eager"/>
+    </resources>
+    <jfx:javafx-desc width="600" height="400" main-class="application.Main" name="Main"/>
+</jnlp>
+
