@@ -7,20 +7,21 @@ from lib.cui_output import CUIOutput
 
 def main():
     megurimasu = MeguriMasuCore(createRandomGameSet())
-    cuiInput = CUIInput(megurimasu.play, **createInputTypeOfEachAgent())
+    cuiInput  = CUIInput(megurimasu.play, **createInputTypeOfEachAgent())
     cuiOutput = CUIOutput(megurimasu.play)
 
-    # ゲームの説明を行う
+    # ゲームの説明
     cuiOutput.printGameExplain()
 
+    # ゲームを進行
     for act in megurimasu.act():
-        # ターンの状態を表示する
         cuiOutput.printTurnStatus()
         act(cuiInput.input())
     megurimasu.endAct()
 
-    # ゲームの終了メッセージを表示する
+    # ゲームの終了メッセージを表示
     cuiOutput.printGameEndMessage()
+
 
 
 if __name__ == "__main__":
