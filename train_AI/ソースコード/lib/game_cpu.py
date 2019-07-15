@@ -5,13 +5,11 @@ from lib.conversion_action import conversioActionToGUIFromCUI
 
 def createSearch(play):
     column = len(play.scoreBoard)
-    row    = len(play.scoreBoard[0])
+    row = len(play.scoreBoard[0])
 
     # データベースから個々のエージェントの最善手を検索
     search = db.Search(row, column)
-
     return search
-
 
 def createInitDataForLearn(play):
     """
@@ -35,7 +33,6 @@ def createInitDataForLearn(play):
     initializeData["Size"] = [scoreBoardRow, scoreBoardColunmn]
 
     return initializeData
-
 
 def createTurnDataForLearn(play):
     """
@@ -95,7 +92,6 @@ def createTurnDataForLearn(play):
     turn_data["Board"] = allPlaceTileState
 
     return turn_data
-
 
 def createTurmDataForLearn(play):
     """
@@ -190,7 +186,6 @@ def searchBestActionOfEachAgent(search, searchInformation):
     }
 
     return bestActionOfEachAgent
-
 
 def searchBestActionOfEachAgentForGUI(search, searchInformation):
     """

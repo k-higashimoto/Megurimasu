@@ -31,7 +31,7 @@ class MeguriMasuCore:
         if (initializeFunc is not None):
             additionalFunc(self.playData())
 
-
+    ############################################################################
     def act(self):
         # 　状態を更新
 
@@ -196,7 +196,6 @@ class Playing:
         # とりあえずログ、型は要相談
         self.log = []
 
-
     ##### 動作関連  #################################################################
 
     def action(self, agent: object):
@@ -205,7 +204,6 @@ class Playing:
         """
 
         agent.action(self.teamA, self.teamB)
-
 
     ###### 動作判定  ##########################################################################
     def checkAgentAction(self, agentAction: dict) -> dict:

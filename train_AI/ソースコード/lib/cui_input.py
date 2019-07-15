@@ -9,7 +9,7 @@ import json
 
 class CUIInput():
     """
-    ゲームのエージェントの入力を行うクラス
+    ゲームのエージェントの入力を司るクラス
     """
 
     def __init__(self,
@@ -31,6 +31,7 @@ class CUIInput():
         エージェントの入力形式から、データベース(search)を読み込むかどうか判定する
         @return search or None
         """
+
         if self._inputTypeOfAgentA == "cpu":
             return createSearch(self._play)
         elif self._inputTypeOfAgentB == "cpu":
@@ -47,7 +48,7 @@ class CUIInput():
         エージェントの動作の入力を行う
         @return agentAction エージェントA~Dのそれぞれの入力データ
         """
-        
+
         agentAction = {
             "agentA": {
                 "act": ActType.WAIT,
@@ -66,49 +67,60 @@ class CUIInput():
                 "rmAct": ActType.WAIT,
             }
         }
-        
+
         # エージェントAの入力を行う
         if self._inputTypeOfAgentA == "cpu":
-            agentAction["agentA"]["act"], agentAction["agentA"]["rmAct"] = self._CPU("agentA")
+            agentAction["agentA"]["act"], agentAction["agentA"]["rmAct"] = self._CPU(
+                "agentA")
 
         elif self._inputTypeOfAgentA == "manual":
-            agentAction["agentA"]["act"], agentAction["agentA"]["rmAct"] = self._manual("agentA")
+            agentAction["agentA"]["act"], agentAction["agentA"]["rmAct"] = self._manual(
+                "agentA")
 
         elif self._inputTypeOfAgentA == "random":
-            agentAction["agentA"]["act"], agentAction["agentA"]["rmAct"] = self._random("agentA")
+            agentAction["agentA"]["act"], agentAction["agentA"]["rmAct"] = self._random(
+                "agentA")
 
         # エージェントBの入力を行う
         if self._inputTypeOfAgentB == "cpu":
-            agentAction["agentB"]["act"], agentAction["agentB"]["rmAct"] = self._CPU("agentB")
+            agentAction["agentB"]["act"], agentAction["agentB"]["rmAct"] = self._CPU(
+                "agentB")
 
         elif self._inputTypeOfAgentB == "manual":
-            agentAction["agentB"]["act"], agentAction["agentB"]["rmAct"] = self._manual("agentB")
+            agentAction["agentB"]["act"], agentAction["agentB"]["rmAct"] = self._manual(
+                "agentB")
 
         elif self._inputTypeOfAgentB == "random":
-            agentAction["agentB"]["act"], agentAction["agentB"]["rmAct"] = self._random("agentB")
+            agentAction["agentB"]["act"], agentAction["agentB"]["rmAct"] = self._random(
+                "agentB")
 
         # エージェントCの入力を行う
         if self._inputTypeOfAgentC == "cpu":
-            agentAction["agentC"]["act"], agentAction["agentC"]["rmAct"] = self._CPU("agentC")
+            agentAction["agentC"]["act"], agentAction["agentC"]["rmAct"] = self._CPU(
+                "agentC")
 
         elif self._inputTypeOfAgentC == "manual":
-            agentAction["agentC"]["act"], agentAction["agentC"]["rmAct"] = self._manual("agentC")
+            agentAction["agentC"]["act"], agentAction["agentC"]["rmAct"] = self._manual(
+                "agentC")
 
         elif self._inputTypeOfAgentC == "random":
-            agentAction["agentC"]["act"], agentAction["agentC"]["rmAct"] = self._random("agentC")
+            agentAction["agentC"]["act"], agentAction["agentC"]["rmAct"] = self._random(
+                "agentC")
 
         # エージェントDの入力を行う
         if self._inputTypeOfAgentD == "cpu":
-            agentAction["agentD"]["act"], agentAction["agentD"]["rmAct"] = self._CPU("agentD")
+            agentAction["agentD"]["act"], agentAction["agentD"]["rmAct"] = self._CPU(
+                "agentD")
 
         elif self._inputTypeOfAgentD == "manual":
-            agentAction["agentD"]["act"], agentAction["agentD"]["rmAct"] = self._manual("agentD")
+            agentAction["agentD"]["act"], agentAction["agentD"]["rmAct"] = self._manual(
+                "agentD")
 
         elif self._inputTypeOfAgentD == "random":
-            agentAction["agentD"]["act"], agentAction["agentD"]["rmAct"] = self._random("agentD")
+            agentAction["agentD"]["act"], agentAction["agentD"]["rmAct"] = self._random(
+                "agentD")
 
         return agentAction
-
 
     def _CPU(self, agentName) -> dict:
         """
@@ -119,7 +131,9 @@ class CUIInput():
 
         # データベースから個々のエージェントの最善手を検索
         searchInformation = createSearchInfoForSearch(self._play)
-        bestActionOfEachAgent = searchBestActionOfEachAgent(self._search, searchInformation)
+        bestActionOfEachAgent = searchBestActionOfEachAgent(
+            self._search, searchInformation
+        )
 
         baseAction = ActType(bestActionOfEachAgent[agentName]["act"])
         removeAction = ActType(bestActionOfEachAgent[agentName]["rmAct"])
@@ -154,9 +168,10 @@ class CUIInput():
 
         baseAction = ActType.WAIT
         removeAction = ActType.WAIT
-        while True:
 
-            # ユーザーに基本行動を入力させる
+        # ユーザーに基本行動を入力させる
+        print("\n0:停滞 1:右 2:右下 3:下 4:左下 5:左 6:左上 7:上 8:右上 9:タイル削除")
+        while True:
             baseActionOfInput = input(f"[ {agentName} ]動作を入力 >> ")
 
             # 移動の場合(1~8までの数字が入力されたら)
@@ -196,7 +211,6 @@ class CUIInput():
                 continue
 
         return baseAction, removeAction
-
 
     def _random(self, agentName) -> dict:
         """
@@ -263,7 +277,7 @@ def createInputTypeOfEachAgent():
     個々のエージェントの入力形式を入力させる
     @return inputTypeOfEachAgent 個々のエージェントの入力形式
     """
-    
+
     inputTypeOfEachAgent = {
         "agentA": None,
         "agentB": None,
@@ -272,6 +286,7 @@ def createInputTypeOfEachAgent():
     }
 
     # 個々のエージェントの入力形式を入力させる
+    print("\n手動:manual ランダム:random コンピューター:cpu")
     for agentName in inputTypeOfEachAgent.keys():
         while True:
             inputType = input(f"{agentName}の入力形式を入力してください: ")
@@ -290,12 +305,12 @@ def createInputTypeOfEachAgent():
 
             else:
                 continue
-    
+
     inputTypeOfEachAgent = {
         "inputTypeOfAgentA": inputTypeOfEachAgent["agentA"],
         "inputTypeOfAgentB": inputTypeOfEachAgent["agentB"],
         "inputTypeOfAgentC": inputTypeOfEachAgent["agentC"],
         "inputTypeOfAgentD": inputTypeOfEachAgent["agentD"],
     }
-    
+
     return inputTypeOfEachAgent
